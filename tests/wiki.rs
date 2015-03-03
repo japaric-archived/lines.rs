@@ -10,7 +10,7 @@ use lines::Lines;
 
 #[test]
 fn wiki() {
-    let mut file = BufReader::new(File::open("index.html").unwrap());
+    let file = BufReader::new(File::open("index.html").unwrap());
     let mut lines = file.lines();
 
     let mut std_checksum = 0;
@@ -18,7 +18,7 @@ fn wiki() {
         std_checksum += line.as_bytes().iter().fold(0, |acc, &b| acc + b as u64);
     }
 
-    let mut file = BufReader::new(File::open("index.html").unwrap());
+    let file = BufReader::new(File::open("index.html").unwrap());
     let mut lines = Lines::from(file);
 
     let mut lines_checksum = 0;
