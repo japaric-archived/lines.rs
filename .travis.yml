@@ -1,0 +1,32 @@
+language: rust
+
+env:
+  global:
+    - secure: ED4qhd/s11JXobaeA+vSdRx6BqV44BXrSD2Sqziultf4SdMsVC8o7BaGJKFUr5vPo1iaNRU3V0ISXS8/yQPF+yBIA2w+XlUfezp6IM1aTONiw1CPgMAqAc3ABI1Lkj4HCz8JMHWvqeyHfhcCS0OTDILPdwRKeaWPNE+nmzB82gM=
+
+before_install:
+  - sudo apt-get update -qq
+
+install:
+  - sudo apt-get install -qq valgrind
+
+script:
+  - cargo build --verbose
+  - wget 'http://en.wikipedia.org'
+  - cargo test --verbose
+  - cargo doc --verbose
+  - cargo build --release
+  - cat index.html | wc
+  - valgrind target/release/test-std
+  - valgrind target/release/test-lines
+  - ./check-line-length.sh
+
+after_success:
+  - '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && bash upload-docs.sh'
+
+branches:
+  only: master
+
+notifications:
+  email:
+    on_success: never
