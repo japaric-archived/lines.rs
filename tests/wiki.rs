@@ -1,9 +1,6 @@
-#![feature(fs)]
-#![feature(io)]
-
 extern crate lines;
 
-use std::io::{BufReadExt, BufReader};
+use std::io::{BufRead, BufReader};
 use std::fs::File;
 
 use lines::Lines;

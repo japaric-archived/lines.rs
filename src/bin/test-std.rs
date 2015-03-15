@@ -1,8 +1,5 @@
-#![feature(fs)]
-#![feature(io)]
-
 use std::fs::File;
-use std::io::{BufReadExt, BufReader};
+use std::io::{BufRead, BufReader};
 
 fn main() {
     let file = BufReader::new(File::open("index.html").unwrap());

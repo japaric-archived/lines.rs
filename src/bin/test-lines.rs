@@ -1,6 +1,3 @@
-#![feature(fs)]
-#![feature(io)]
-
 extern crate lines;
 
 use std::fs::File;

@@ -1,5 +1,4 @@
 #![crate_type = "lib"]
-#![feature(io)]
 
 //! A faster and leaner `Lines` adaptor.
 //!
@@ -66,8 +65,8 @@ impl<B> Lines<B> where B: BufRead {
         self.buffer.clear();
 
         match self.stream.read_line(&mut self.buffer) {
-            Ok(()) if self.buffer.len() == 0 => None,
-            Ok(()) => {
+            Ok(0) => None,
+            Ok(_) => {
                 if self.buffer.ends_with("\n") {
                     self.buffer.pop();
                 }
