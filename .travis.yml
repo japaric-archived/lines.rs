@@ -17,8 +17,8 @@ script:
   - cargo doc --verbose
   - cargo build --release
   - cat index.html | wc
-  - valgrind target/release/test-std
-  - valgrind target/release/test-lines
+  - valgrind target/release/test_std
+  - valgrind target/release/test_lines
   - ./check-line-length.sh
 
 after_success:
